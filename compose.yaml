@@ -1,0 +1,61 @@
+name: libmanager
+services:
+  application:
+    build:
+      context: .
+      dockerfile: dockerfiles/php/Dockerfile
+    image: application
+    container_name: application
+    tty: true
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./application:/var/www/app
+    networks:
+      - application
+    environment:
+      SMTP_HOST: ${SMTP_HOST}
+      SMTP_PORT: ${SMTP_PORT}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_DATABASE: ${DB_DATABASE}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    ports:
+      - "8000:80"
+    volumes:
+      - ./application:/var/www/app
+      - ./dockerfiles/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - application
+
+  mysql:
+    image: mariadb:11.3.2
+    container_name: mariadb
+    ports:
+      - "3306:3306"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PORT: ${DB_PORT}
+    volumes:
+      - ./databases/mariadb:/var/lib/mysql
+    networks:
+      - application
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: mailhog
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+networks:
+  application:
+    driver: bridge
