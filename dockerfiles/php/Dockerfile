@@ -8,7 +8,8 @@ RUN apk add --no-cache \
   libpng-dev \
   libzip-dev \
   zlib-dev \
-  mariadb-dev 
+  mariadb-dev \
+  supervisor
 
 # Instalando extensões PHP
 RUN docker-php-ext-install gd \
@@ -20,6 +21,8 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Instalando o node
 RUN apk add --no-cache nodejs npm
+
+CMD ["supervisord", "-c", "/etc/supervisord.conf"]
 
 # Configurandoo diretório de trabalho
 WORKDIR /var/www/app
