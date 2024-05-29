@@ -45,4 +45,4 @@ Todos os serviços definidos no `compose.yaml` estão conectados a uma rede Dock
 ### Conclusão
 O uso do Docker Compose neste repositório simplifica enormemente o processo de configuração e execução do ambiente de desenvolvimento do LibManager. Com um único comando, todos os serviços necessários são iniciados e configurados, proporcionando um ambiente de desenvolvimento consistente e reproduzível.
 
-Acompanhe nosso [manual de instalação](INSTALL.MD) e veja o passo a passo de como executar este projeto.
+Acompanhe nosso [manual de instalação](INSTALL.md) e veja o passo a passo de como executar este projeto.
