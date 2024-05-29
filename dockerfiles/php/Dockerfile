@@ -9,7 +9,8 @@ RUN apk add --no-cache \
   libzip-dev \
   zlib-dev \
   mariadb-dev \
-  supervisor
+  supervisor \
+  tzdata
 
 # Instalando extensões PHP
 RUN docker-php-ext-install gd \
@@ -22,7 +23,10 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Instalando o node
 RUN apk add --no-cache nodejs npm
 
-CMD ["supervisord", "-c", "/etc/supervisord.conf"]
+# CMD ["supervisord", "-c", "/etc/supervisord.conf"]
+
+ENV TZ=America/Sao_Paulo
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # Configurandoo diretório de trabalho
 WORKDIR /var/www/app
