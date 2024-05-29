@@ -145,5 +145,8 @@ Há duas maneiras de se fazer isso. O comando abaixo vai abrir a fila de serviç
 ```
 
 Caso queira iniciar a fila como um serviço, utilize o comando abaixo para iniciar um serviço que montamos utilizando o `supervisor` um recurso do Linux. A fila será iniciada e rodará em background.
+```bash
+nohup supervisord -c /etc/supervisord.conf &
+```
 
 Para ver os emails disparados acesse o mailhog no seu navegador em `http://localhost:8025`.
