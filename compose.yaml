@@ -38,7 +38,7 @@ services:
     image: mariadb:11.3.2
     container_name: mariadb
     ports:
-      - "3306:3306"
+      - "33060:3306"
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
@@ -57,6 +57,8 @@ services:
     ports:
       - "8025:8025"
       - "1025:1025"
+    networks:
+      - application
 networks:
   application:
     driver: bridge
