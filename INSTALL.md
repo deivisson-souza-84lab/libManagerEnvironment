@@ -1,5 +1,12 @@
 # Manual de Instalação
 
+## Requisitos
+Para esta instalação serão necessárias as ferramentas:
+- Git
+- Docker
+- Docker Compose
+
+## Instalação
 O primeiro passo é clonar o projeto deste repositório.
 ```bash
 $ git clone https://github.com/deivisson-souza-84lab/libManagerEnvironment.git libManagerEnvironment
